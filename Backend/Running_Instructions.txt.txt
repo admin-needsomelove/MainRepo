@@ -1,0 +1,8 @@
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+
+pip install -r .\Backend\lambda\requirements.txt --target .\hello_cdk\lambda\layer\python\lib\python3.9\site-packages
+#zip the python bitch wuth python folder at root
+
+#maybe cdk bootstrap aws://ACCOUNT-NUMBER/REGION
+cdk deploy
