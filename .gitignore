@@ -1,3 +1,31 @@
-node_modules
-cdk.out
+site-packages
+python.zip
+
+# Frontend
+node_modules/
+.expo/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# macOS
+.DS_Store
+
+
+# Backend
+*.swp
+package-lock.json
+__pycache__
+.pytest_cache
 .venv
+*.egg-info
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
