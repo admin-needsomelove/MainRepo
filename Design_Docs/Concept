@@ -1,0 +1,24 @@
+Paying 'Friendsters' who have great bios like Cambly
+
+
+POC:
+Sign up / login
+#Amazon Cognito hosted UI for sign-up and sign-in
+
+listing of profiles 
+
+clicking on profile and going to their bios
+
+bios hosting videos and photos and summary and all that
+
+private chat room: getstream.io
+
+creating profiles 
+
+stripe payment collection/payout 
+
+
+main schema
+userID : type : payment_info: username: password: details(like age, name, blah blah): friendster details(summary,video_link)
+
+

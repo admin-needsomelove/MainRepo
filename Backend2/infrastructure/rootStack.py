@@ -5,6 +5,8 @@ from aws_cdk import (
     aws_dynamodb as dynamo
 )
 from constructs import Construct
+
+from . import table
 from . import lambdaFactory
 from . import apiGatewayFactory
 
@@ -13,12 +15,11 @@ class RootStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        girls_table = dynamo.Table(self,"GirlsTable",
-            partition_key=dynamo.Attribute(name="id",type= dynamo.AttributeType.STRING),
-            removal_policy= RemovalPolicy.DESTROY
-        )
+        mainTable = table.createTable(self)
 
-        lambda_function = lambdaFactory.createLambda(self,girls_table)
+        lambdaFunction = lambdaFactory.createLambda(self,mainTable)
 
-        apiGateway = apiGatewayFactory.createApiGateway(self,lambda_function)
+        apiGateway = apiGatewayFactory.createApiGateway(self,lambdaFunction)
+    
+    
 

@@ -23,7 +23,7 @@ def createLambda(self,table: aws_dynamodb.Table):
 
 
     apiFunction = aws_lambda.Function(
-        self, 'girlsLambdaFunction',
+        self, 'mainLambdaFunction',
         runtime= aws_lambda.Runtime.PYTHON_3_9,
         handler= "main.lambda_handler",
         code= aws_lambda.Code.from_asset('./infrastructure/lambda'),

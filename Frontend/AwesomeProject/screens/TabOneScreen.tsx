@@ -14,11 +14,10 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
     <View style={styles.container}>
       <Text style={styles.title}>{currentText}</Text>
       <Text >Hodggi</Text>
-      <Button onPress={navigation.navigate('TabTwo')}></Button>
       <Image source={{
         uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
         }} style={{ width: 200, height: 200 }}></Image>
-      <TextInput style={{height=40,width=40}} onChangeText={setText}></TextInput>
+      <TextInput style={{height : 40, width : 40}} onChangeText={setText}></TextInput>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <EditScreenInfo path="/screens/TabOneScreen.tsx" />
       
