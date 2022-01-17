@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Button } from 'react-native-paper';
 import axios from 'axios';
+import { Auth } from 'aws-amplify';
 
 export default function Results ({ route , navigation } ) {
 
@@ -22,6 +23,12 @@ export default function Results ({ route , navigation } ) {
           .catch(function (error) {
             console.log(error);
           });
+
+          Auth.currentAuthenticatedUser().then((user) => {
+            console.log('user is ' + JSON.stringify(user));
+          });
+
+        
     }
 
     return (

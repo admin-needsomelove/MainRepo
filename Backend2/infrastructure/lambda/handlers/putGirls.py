@@ -23,7 +23,8 @@ def putGirlsHandler(body: dict):
         'isBase64Encoded': False,
         'statusCode': 200,
         'headers': {
-            'Content-Type': 'text/plain'
+            'Content-Type': 'text/plain',
+            'Access-Control-Allow-Origin': '*'
         },
         'body': json.dumps(result)
     }

@@ -14,7 +14,6 @@ def getGirlsHandler(body: dict):
         }
     )
 
-    #'Access-Control-Allow-Origin': '*'
     response = {
         'isBase64Encoded': False,
         'statusCode': 200,
