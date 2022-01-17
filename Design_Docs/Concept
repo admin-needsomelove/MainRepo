@@ -3,7 +3,7 @@ Paying 'Friendsters' who have great bios like Cambly
 
 POC:
 Sign up / login
-#Amazon Cognito hosted UI for sign-up and sign-in
+#Amazon Cognito hosted UI for sign-up and sign-in using aws AMPLify
 
 listing of profiles 
 
@@ -16,7 +16,6 @@ private chat room: getstream.io
 creating profiles 
 
 stripe payment collection/payout 
-
 
 main schema
 userID : type : payment_info: username: password: details(like age, name, blah blah): friendster details(summary,video_link)

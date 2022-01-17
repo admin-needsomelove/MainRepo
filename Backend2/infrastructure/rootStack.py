@@ -6,6 +6,7 @@ from aws_cdk import (
 )
 from constructs import Construct
 
+from . import identityManagement
 from . import table
 from . import lambdaFactory
 from . import apiGatewayFactory
@@ -20,6 +21,8 @@ class RootStack(Stack):
         lambdaFunction = lambdaFactory.createLambda(self,mainTable)
 
         apiGateway = apiGatewayFactory.createApiGateway(self,lambdaFunction)
+
+        ##userManager = identityManagement.setupUsers(self)
     
     
 
