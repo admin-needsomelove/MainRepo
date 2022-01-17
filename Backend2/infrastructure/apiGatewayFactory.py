@@ -4,7 +4,8 @@ def createApiGateway(self,lambda_function: aws_lambda.Function):
     
     api = aws_apigateway.LambdaRestApi(self,"girlsApi",
     handler=lambda_function,
-    proxy=False)
+    proxy=False,
+    default_cors_preflight_options= aws_apigateway.CorsOptions(allow_origins=aws_apigateway.Cors.ALL_ORIGINS))
 
     girlsResource = api.root.add_resource('girls')
     girlsResource.add_method("POST")
@@ -21,6 +22,6 @@ Sample requests
 
 {
     "taskType":"getGirls",
-    "id": "37857"
+    "id": "83857"
 }
 """

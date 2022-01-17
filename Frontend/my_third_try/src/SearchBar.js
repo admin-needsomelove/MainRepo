@@ -9,7 +9,7 @@ const SearchComponent = ( props ) => {
 
   function handleClick() {
     console.log('Pressed')
-    props.navigation.navigate('Results')
+    props.navigation.navigate('Results', {searchQuery: searchQuery})
   }
 
   return (
