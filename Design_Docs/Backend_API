@@ -1,0 +1,9 @@
+main schema
+username : passwd : type : payment_info: details(like age, name, summary , video_link, photo_link)
+
+getProfileList()
+getProfileDetails(username)
+updateProfile(username,name,age,summary,video_link,photo_links)
+signUp(username,password,email,phone)
+signin(username,password)
+

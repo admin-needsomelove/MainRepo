@@ -1,15 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Amplify , { Auth } from 'aws-amplify'
-import awsconfig from './src/aws-exports'
-import { withAuthenticator } from 'aws-amplify-react-native'
-import SearchComponent  from './src/SearchBar'
-import Results from './src/Results'
-import Welcome from './src/Welcome'
+import SearchComponent  from './src/components/SearchBar'
+import Results from './src/components/Results'
+import Welcome from './src/components/Welcome'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-Amplify.configure(awsconfig)
 
 function HomeScreen({ navigation }) {
   return (
@@ -44,4 +39,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withAuthenticator(App);
+export default App;

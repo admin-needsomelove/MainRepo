@@ -32,7 +32,7 @@ def populateTableWithTestData(self,table):
 
 def testDataGenerator(self,table):
 
-    testData = [["insanebutsmart","zugzwang","Friendster","Soo much money","my friendster details"],
+    testData = [["insanebutsmart","zugzwang","Friendster","Soo much money","{'name':'yash','age':'25', email:'yash@blah.com','summary':'blah blah','photo_links':'links to all photos','video_link':'link to video'}"],
     ["joker2895","zugzwang","Customer","Soo lil money","my customer details"]
     ]
 
@@ -53,7 +53,7 @@ def testDataGenerator(self,table):
                                 "S": request_data[3]
                             },
                             "details": {
-                                "S": request_data[5]
+                                "S": request_data[4]
                             }
                         }   
                     }
