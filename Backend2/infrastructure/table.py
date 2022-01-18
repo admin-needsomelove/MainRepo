@@ -7,7 +7,7 @@ from aws_cdk import (
 
 def createTable(self):
     mainTable = dynamo.Table(self,"MainTable",
-            partition_key=dynamo.Attribute(name="id",type= dynamo.AttributeType.STRING),
+            partition_key=dynamo.Attribute(name="username",type= dynamo.AttributeType.STRING),
             removal_policy= RemovalPolicy.DESTROY
         )
     
@@ -32,28 +32,25 @@ def populateTableWithTestData(self,table):
 
 def testDataGenerator(self,table):
 
-    testData = [["Susan","Friendster","Soo much money","insanebutsmart","zugzwang","my details"],
-    ["yash","Customer","Soo little money","mememe","zugz","my customer details"]
+    testData = [["insanebutsmart","zugzwang","Friendster","Soo much money","my friendster details"],
+    ["joker2895","zugzwang","Customer","Soo lil money","my customer details"]
     ]
 
     def create_request(request_data):
         return {
                     "PutRequest": {
                         "Item": {
-                            "id": {
+                            "username": {
                                 "S": request_data[0]
                             },
-                            "type": { 
+                            "password": { 
                                 "S": request_data[1]
                             },
-                            "payment_info": {
+                            "account_type": {
                                 "S": request_data[2]
                             },
-                            "username": {
+                            "payment_info": {
                                 "S": request_data[3]
-                            },
-                            "password": {
-                                "S": request_data[4]
                             },
                             "details": {
                                 "S": request_data[5]

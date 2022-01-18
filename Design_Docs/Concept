@@ -18,6 +18,17 @@ creating profiles
 stripe payment collection/payout 
 
 main schema
-userID : type : payment_info: username: password: details(like age, name, blah blah): friendster details(summary,video_link)
+username : passwd : type : payment_info: details(like age, name, summary , video_link, photo_link)
 
 
+
+getProfiles()
+getProfileDetails(username)
+updateProfile(username,name,age,summary,video_link,photo_link)
+
+
+
+
+App flow:
+
+Home screen (asking custome ror freindster) - >
