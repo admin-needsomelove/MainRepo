@@ -5,6 +5,8 @@ import Results from './src/components/Results'
 import Welcome from './src/components/Welcome'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SignUp from './src/components/auth/signUp'
+import Login from './src/components/auth/login';
 
 function HomeScreen({ navigation }) {
   return (
@@ -21,8 +23,10 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="SignUp">
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Welcome" component={Welcome} />
         <Stack.Screen name="Results" component={Results} />
       </Stack.Navigator>
