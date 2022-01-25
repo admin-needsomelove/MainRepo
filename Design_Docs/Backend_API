@@ -22,6 +22,6 @@ chat API's
 
 
 #generate send and verify a token based on username apssword and secret using public key crypto
-signUp(username,password,email,phone)
+signUp(username,password)
 signin(username,password)
 

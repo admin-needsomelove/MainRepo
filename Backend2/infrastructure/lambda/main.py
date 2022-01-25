@@ -3,8 +3,11 @@ import logging
 import jsonpickle
 from aws_xray_sdk.core import xray_recorder
 from aws_xray_sdk.core import patch_all
-from handlers import profileListHandler , profileDetailHandler, profileUpdateHandler
-from constants import PROFILE_LIST_PATH , PROFILE_DETAIL_PATH, PROFILE_UPDATE_PATH
+from handlers.profileDetailHandler import profileDetailHandler
+from handlers.profileListHandler import profileListHandler
+from handlers.profileUpdateHandler import profileUpdateHandler
+from handlers.signUpHandler import signUpHandler
+from constants import *
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -15,31 +18,24 @@ def lambda_handler(event, context):
     logger.info('## EVENT\r' + jsonpickle.encode(event))
     logger.info('## CONTEXT\r' + jsonpickle.encode(context))
 
-    path = event['path'] #should be profileList, profileDetail, profileUpdate
+    path = event['path'] #should be something like profileList
     
-    options = {PROFILE_LIST_PATH : profileListHandler.profileListHandler,
-           PROFILE_DETAIL_PATH : profileDetailHandler.profileDetailHandler,
-           PROFILE_UPDATE_PATH : profileUpdateHandler.profileUpdateHandler}   
+    options = {
+           PROFILE_LIST_PATH : profileListHandler,
+           PROFILE_DETAIL_PATH : profileDetailHandler,
+           PROFILE_UPDATE_PATH : profileUpdateHandler,
+           SIGNUP_PATH: signUpHandler
+           }   
 
     #because profileList has no body
+    PATHS_WITH_NO_EXPECTED_BODY = set([PROFILE_LIST_PATH])
     logger.info("The path is " + path)
-    if path != PROFILE_LIST_PATH:
+    if path not in PATHS_WITH_NO_EXPECTED_BODY:
         body = jsonpickle.decode(event['body'])
     else:
         body = None
 
     return options[path](body)
-
-"""
-{
-      "taskType":"putGirls",
-      "name":"jessica",
-      "age":"25",
-      "color":"white"
-}
-
-
-"""
 
 """
 /profileList

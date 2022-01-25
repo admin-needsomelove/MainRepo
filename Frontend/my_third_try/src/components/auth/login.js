@@ -17,7 +17,7 @@ export default function Login ({ route , navigation } ) {
                 </Button>
                 <Text>
                     <Text>Don't have an account? </Text>
-                    <Text onPress={(e) => navigation.navigate('SignUp')}>{'Register'}</Text>
+                    <Text onPress={(e) => navigation.navigate('SignUp')} style={styles.green}>{'Register'}</Text>
                 </Text>
             </View>
         );

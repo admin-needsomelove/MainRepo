@@ -16,6 +16,10 @@ def createApiGateway(self,lambda_function: aws_lambda.Function):
     profileUpdateResource = api.root.add_resource('profileUpdate')
     profileUpdateResource.add_method("POST")
 
+    signUpResource = api.root.add_resource('signUp')
+    signUpResource.add_method("POST")
+
+
     return api
 
 """

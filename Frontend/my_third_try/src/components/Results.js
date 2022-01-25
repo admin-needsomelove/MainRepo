@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { Button } from 'react-native-paper';
 import axios from 'axios';
-import { getGirlsParser } from '../services/parser';
+import { backendParser } from '../services/parser';
+import { BACKEND_URL } from '../constants/URL';
 
 
 export default function Results ({ route , navigation } ) {
@@ -14,11 +15,11 @@ export default function Results ({ route , navigation } ) {
     console.log("profile list is " + searchQuery)
 
     useEffect(() => {
-      const url = 'https://4rhtw1mjta.execute-api.us-east-1.amazonaws.com/prod/profileList';
+      const url = BACKEND_URL + 'profileList';
         axios.post(url, {
         })
           .then(function (response) {
-            setBackendData(getGirlsParser(response));
+            setBackendData(backendParser(response));
           })
           .catch(function (error) {
             console.log(error);
