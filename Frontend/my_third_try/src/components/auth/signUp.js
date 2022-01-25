@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { TextInput, Button, Text } from 'react-native-paper';
+import { View } from 'react-native';
+import { styles } from '../../styles/common';
 
 export default function Signup ({ route , navigation } ) {
 
@@ -7,7 +9,7 @@ export default function Signup ({ route , navigation } ) {
       const [password, setPassword] = React.useState("");
       
       return (
-            <div>
+        <View style={styles.container}>
                 <TextInput label="username" value={username} onChangeText={text => setUsername(text)}/>
                 <TextInput secureTextEntry={true} label="password" value={password} onChangeText={text => setPassword(text)}/>
                 <Button mode="contained" onPress={() => console.log('Pressed')}>
@@ -18,6 +20,6 @@ export default function Signup ({ route , navigation } ) {
                     <Text onPress={(e) => navigation.navigate('Login')}>{'Login'}</Text>
                 </Text>
                 
-            </div>
+        </View>
         );
     }
