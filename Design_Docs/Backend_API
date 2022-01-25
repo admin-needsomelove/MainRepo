@@ -1,9 +1,27 @@
 main schema
-username : passwd : type : payment_info: details(like age, name, summary , video_link, photo_link)
+username : passwd : type : payment_info: details(like age, name, email summary , video_link, photo_links)
 
-getProfileList()
-getProfileDetails(username)
-updateProfile(username,name,age,summary,video_link,photo_links)
+friends table
+partition sort key
+username: friends
+
+getProfileList(token)
+getProfileDetails(token,username)
+updateCustomerType(token, type)
+updateName(token, name)
+updateAge(token, age)
+updateEmail(token, email)
+updateDescription(token, description)
+updatePhotos(token, photo_links)
+updateVideo(token video_link)
+getAccountDetails(token)
+addFriend(token , user)
+
+
+chat API's
+
+
+#generate send and verify a token based on username apssword and secret using public key crypto
 signUp(username,password,email,phone)
 signin(username,password)
 

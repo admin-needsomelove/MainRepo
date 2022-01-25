@@ -1,10 +1,5 @@
 Paying 'Friendsters' who have great bios like Cambly
 
-
-POC:
-Sign up / login
-#Amazon Cognito hosted UI for sign-up and sign-in using aws AMPLify
-
 listing of profiles 
 
 clicking on profile and going to their bios
@@ -15,4 +10,10 @@ private chat room: getstream.io
 
 creating profiles 
 
-stripe payment collection/payout 
+quickbooks for bookkeeping and payout to 1099 contractors
+
+payment model:
+customer 99.99 bucks per month subscriptions
+freidnsters get 50 bucks per month / per customer
+one friendster at a time
+in app purchases for ios and android

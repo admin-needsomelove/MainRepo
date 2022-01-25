@@ -5,7 +5,9 @@ export function getGirlsParser(response){
 
     //const obj = JSON.parse(response)
 
-    console.log(response.data)
+    //console.log(response.data)
+
+    return JSON.stringify(response)
 
 
 }

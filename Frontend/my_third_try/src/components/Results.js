@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { Button } from 'react-native-paper';
 import axios from 'axios';
@@ -8,18 +8,31 @@ import { getGirlsParser } from '../services/parser';
 export default function Results ({ route , navigation } ) {
 
     const { searchQuery } = route.params;
-    console.log("result got " + searchQuery)
+
+    const [ backendData, setBackendData ] = useState(0);
+
+    console.log("profile list is " + searchQuery)
+
+    useEffect(() => {
+      const url = 'https://4rhtw1mjta.execute-api.us-east-1.amazonaws.com/prod/profileList';
+        axios.post(url, {
+        })
+          .then(function (response) {
+            setBackendData(getGirlsParser(response));
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    });
 
     
     function getBackendData() {
 
-        const url = 'https://lp65hh01w0.execute-api.us-east-1.amazonaws.com/prod/girls';
+        const url = 'https://4rhtw1mjta.execute-api.us-east-1.amazonaws.com/prod/profileList';
         axios.post(url, {
-            taskType:'getGirls',
-            id:'83857'
         })
           .then(function (response) {
-            console.log(getGirlsParser(response));
+            setBackendData(response);
           })
           .catch(function (error) {
             console.log(error);
@@ -28,7 +41,8 @@ export default function Results ({ route , navigation } ) {
 
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Results Screen {getBackendData()}</Text>
+        <Text>Results Screen</Text>
+        <Text>{ backendData }</Text>
         <Button title="Go to Home" mode="contained" onPress={() => navigation.navigate('Home')}>Home</Button>
         <Button title="Go back" mode="contained" onPress={() => navigation.goBack()}>Back</Button>
       </View>
