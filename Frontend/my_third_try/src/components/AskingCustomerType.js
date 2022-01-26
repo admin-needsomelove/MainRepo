@@ -9,17 +9,18 @@ import { styles } from '../styles/common';
 
 export default function AskingCustomerType ({ route , navigation } ) {
 
-    function onButtonPress(customer_type) {
+    function handlePress(account_type) {
 
         console.log('Customer Type Button Pressed with token '+ global.token)
 
         const url = BACKEND_URL + UPDATE_CUSTOMER_TYPE_PATH;
         axios.post(url, {
             token: global.token,
-            customer_type: customer_type
+            account_type: account_type
         })
           .then(function (response) {
             console.log(backendParser(response));
+            navigation.navigate('Login')
           })
           .catch(function (error) {
             console.log(error);
@@ -29,8 +30,8 @@ export default function AskingCustomerType ({ route , navigation } ) {
     return (
         <View style={styles.container}>
           <Text>Choose who you are bitch</Text>
-          <Button title="Friendster" mode="contained" onPress={onButtonPress('Friendster')}>Friendster</Button>
-          <Button title="Seeker" mode="contained" onPress={onButtonPress('Seeker')}>Seeker</Button>
+          <Button title="Friendster" mode="contained" onPress={() => handlePress('Friendster')}>Friendster</Button>
+          <Button title="Seeker" mode="contained" onPress={() => handlePress('Seeker')}>Seeker</Button>
         </View>
       )
 

@@ -1,38 +1,24 @@
-import boto3
-import os
-import json
-import random
 import logging
-from utilities import auth, http
-dynamodb = boto3.resource('dynamodb')
+from utilities import auth, http , ddb
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 def updateCustomerTypeHandler(body: dict):
 
-    table = dynamodb.Table(os.environ['DYNAMODB'])
-
-    if 'token' not in body:
+    if 'token' not in body or 'account_type' not in body:
+        logger.info("The API call was missing either token field or account_type field")
         return http.returnHttpResponse({})
 
-    auth.verify_token_return_username(body['token'])
+    username = auth.verify_token_return_username(body['token'])
 
-    result = table.put_item(
-       Item={
-            'username': body['username'],
-            'password': body['password']
-        }
-    )
+    if not username:
+        logger.info("The user token was incorrect")
+        return http.returnHttpResponse({})
 
-    response = {
-        'isBase64Encoded': False,
-        'statusCode': 200,
-        'headers': {
-            'Content-Type': 'text/plain',
-            'Access-Control-Allow-Origin': '*'
-        },
-        'body': json.dumps(result)
-    }
+    response = ddb.get_item({'username':username})
+    item = response['Item']
+    item['account_type'] = body['account_type']
+    result = ddb.put_item(item)
 
-    return response
+    return http.returnHttpResponse(result)

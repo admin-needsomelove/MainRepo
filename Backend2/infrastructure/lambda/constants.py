@@ -7,6 +7,6 @@ UPDATE_CUSTOMER_TYPE_PATH = '/updateCustomerType'
 
 
 """
-My secret key fro all user authentication
+My secret key for all user authentication
 """
 SECRET_JWT_KEY = 'howsthatforallthepeopleintheworldhahahaha'

@@ -22,7 +22,7 @@ export default function Login ({ route , navigation } ) {
         })
           .then(function (response) {
             console.log(response)
-            var authentication_success = response.data.authentication_success
+            let authentication_success = response.data.authentication_success
             if (authentication_success){
                 global.token = response.data.token
                 navigation.navigate('AskingCustomerType')

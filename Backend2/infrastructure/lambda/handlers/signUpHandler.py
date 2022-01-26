@@ -1,17 +1,12 @@
 import botocore.exceptions
-#import os
 import json
-#import random
 import logging
 from utilities import http , ddb
-#dynamodb = boto3.resource('dynamodb')
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 def signUpHandler(body: dict):
-
-    #table = dynamodb.Table(os.environ['DYNAMODB'])
 
     if 'username' not in body or 'password' not in body:
         return http.returnHttpResponse({})

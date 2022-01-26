@@ -13,7 +13,7 @@ def get_item(key):
     if 'Item' not in result:
         return None
     
-    return result['Item']
+    return result
 
 def put_item_do_not_overwrite(key, unique_attribute):
     result = table.put_item(
@@ -23,3 +23,17 @@ def put_item_do_not_overwrite(key, unique_attribute):
 
     return True
 
+def put_item(key):
+    result = table.put_item(
+       Item=key
+    )
+
+    return True
+
+def update_item(key, updatedAttributes):
+    result = table.update_item(
+        Key=key,
+        AttributeUpdates=updatedAttributes
+    )
+
+    return True

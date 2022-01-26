@@ -32,6 +32,7 @@ export default function Signup ({ route , navigation } ) {
           })
           .catch(function (error) {
             console.log(error);
+            setErrorMessage("Service error. Please try again later")
           });
 
       }

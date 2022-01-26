@@ -26,18 +26,3 @@ def createApiGateway(self,lambda_function: aws_lambda.Function):
     updateCustomerTypeResource.add_method("POST")
 
     return api
-
-"""
-Sample requests
-{
-  "name": "yash",
-  "age" : "25",
-  "color": "yello",
-  "taskType":"putGirls" 
-}
-
-{
-    "taskType":"getGirls",
-    "id": "83857"
-}
-"""
