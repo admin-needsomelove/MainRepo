@@ -8,6 +8,7 @@ from handlers.profileListHandler import profileListHandler
 from handlers.profileUpdateHandler import profileUpdateHandler
 from handlers.signUpHandler import signUpHandler
 from handlers.signInHandler import signInHandler
+from handlers.updateCustomerTypeHandler import updateCustomerTypeHandler
 from constants import *
 
 logger = logging.getLogger()
@@ -26,7 +27,8 @@ def lambda_handler(event, context):
            PROFILE_DETAIL_PATH : profileDetailHandler,
            PROFILE_UPDATE_PATH : profileUpdateHandler,
            SIGNUP_PATH: signUpHandler,
-           SIGNIN_PATH: signInHandler
+           SIGNIN_PATH: signInHandler,
+           UPDATE_CUSTOMER_TYPE_PATH: updateCustomerTypeHandler
            }   
 
     #because profileList has no body

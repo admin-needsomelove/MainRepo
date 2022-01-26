@@ -10,6 +10,7 @@ export default function Signup ({ route , navigation } ) {
 
       const [username, setUsername] = React.useState("");
       const [password, setPassword] = React.useState("");
+      const [errorMessage, setErrorMessage] = React.useState("");
 
       function onCreateAccount() {
         console.log('Create Account Pressed')
@@ -21,7 +22,13 @@ export default function Signup ({ route , navigation } ) {
         })
           .then(function (response) {
             console.log(backendParser(response));
-            navigation.navigate('Login')
+            if (response.data['Error']){
+              console.log("username exists")
+              setErrorMessage("Username already exists")
+            }
+            else {
+              navigation.navigate('Login')
+            }
           })
           .catch(function (error) {
             console.log(error);
@@ -31,6 +38,7 @@ export default function Signup ({ route , navigation } ) {
       
       return (
         <View style={styles.container}>
+                <Text style={styles.red}>{errorMessage}</Text>
                 <TextInput label="username" value={username} onChangeText={text => setUsername(text)}/>
                 <TextInput secureTextEntry={true} label="password" value={password} onChangeText={text => setPassword(text)}/>
                 <Button mode="contained" onPress={onCreateAccount}>

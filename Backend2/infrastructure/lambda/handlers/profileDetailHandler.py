@@ -2,29 +2,25 @@ import boto3
 import os
 import json
 import logging
-dynamodb = boto3.resource('dynamodb')
+
+from utilities import http , ddb
+#dynamodb = boto3.resource('dynamodb')
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 def profileDetailHandler(body: dict):
 
-    table = dynamodb.Table(os.environ['DYNAMODB'])
+    #table = dynamodb.Table(os.environ['DYNAMODB'])
 
-    result = table.get_item(
+    """ result = table.get_item(
         Key={
             'username': body['username']
         }
-    )
+    ) """
+    if 'username' not in body:
+        return http.returnHttpResponse({})
 
-    response = {
-        'isBase64Encoded': False,
-        'statusCode': 200,
-        'headers': {
-            'Content-Type': 'text/plain',
-            'Access-Control-Allow-Origin': '*'
-        },
-        'body': json.dumps(result)
-    }
+    result = ddb.get_item({'username': body['username']})
 
-    return response
+    return http.returnHttpResponse(result if result else {})

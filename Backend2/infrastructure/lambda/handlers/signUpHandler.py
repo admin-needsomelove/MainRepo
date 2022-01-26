@@ -1,32 +1,29 @@
-import boto3
-import os
+import botocore.exceptions
+#import os
 import json
-import random
+#import random
 import logging
-dynamodb = boto3.resource('dynamodb')
+from utilities import http , ddb
+#dynamodb = boto3.resource('dynamodb')
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 def signUpHandler(body: dict):
 
-    table = dynamodb.Table(os.environ['DYNAMODB'])
+    #table = dynamodb.Table(os.environ['DYNAMODB'])
 
-    result = table.put_item(
-       Item={
+    if 'username' not in body or 'password' not in body:
+        return http.returnHttpResponse({})
+
+    try:
+        result = ddb.put_item_do_not_overwrite({
             'username': body['username'],
             'password': body['password']
-        }
-    )
+        }, 'username')
+    
+    except botocore.exceptions.ClientError as e:
+        if e.response['Error']['Code'] == 'ConditionalCheckFailedException':
+            return http.returnHttpResponse({"Error":"Duplicate Username"})
 
-    response = {
-        'isBase64Encoded': False,
-        'statusCode': 200,
-        'headers': {
-            'Content-Type': 'text/plain',
-            'Access-Control-Allow-Origin': '*'
-        },
-        'body': json.dumps(result)
-    }
-
-    return response
+    return http.returnHttpResponse(result)
