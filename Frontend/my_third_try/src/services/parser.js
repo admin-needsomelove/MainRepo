@@ -1,5 +1,5 @@
 export function backendParser(response){
-    console.log("in get girls parser")
+    //console.log("in get girls parser")
     
     //console.log(response)
 

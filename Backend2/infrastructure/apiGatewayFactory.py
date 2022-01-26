@@ -19,6 +19,11 @@ def createApiGateway(self,lambda_function: aws_lambda.Function):
     signUpResource = api.root.add_resource('signUp')
     signUpResource.add_method("POST")
 
+    signInResource = api.root.add_resource('signIn')
+    signInResource.add_method("POST") 
+
+    updateCustomerTypeResource = api.root.add_resource('updateCustomerType')
+    updateCustomerTypeResource.add_method("POST")
 
     return api
 

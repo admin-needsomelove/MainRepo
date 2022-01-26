@@ -2,7 +2,11 @@ import boto3
 import os
 import json
 import random
+import logging
 dynamodb = boto3.resource('dynamodb')
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def signUpHandler(body: dict):
 

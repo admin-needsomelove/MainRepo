@@ -1,3 +1,4 @@
 jsonpickle
 aws_xray_sdk
 boto3
+pyjwt

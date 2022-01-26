@@ -21,6 +21,7 @@ export default function Signup ({ route , navigation } ) {
         })
           .then(function (response) {
             console.log(backendParser(response));
+            navigation.navigate('Login')
           })
           .catch(function (error) {
             console.log(error);
