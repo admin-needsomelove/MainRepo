@@ -1,2 +1,12 @@
+P0:
+Navigator logic for frontend using redux
+Ddb access patterns
+Sam deploy lambda locally
+Refactor and refactor . Clean it up
+Add decent logging to backend and frontend
+Get stream.io add
+
+
+LONG TERM:
 signup credential requirements
-remove swecret key from codebase
+remove secret key from codebase
