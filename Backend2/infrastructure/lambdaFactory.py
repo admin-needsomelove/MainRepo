@@ -1,5 +1,4 @@
 from aws_cdk import Duration, aws_dynamodb, aws_iam as iam, aws_lambda
-from aws_cdk.aws_apigateway import ApiDefinition 
 
 def createLambda(self,table: aws_dynamodb.Table):
 

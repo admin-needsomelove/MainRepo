@@ -16,33 +16,34 @@ export default function Signup ({ route , navigation } ) {
       function onCreateAccount() {
         console.log('Create Account Pressed')
         const url = BACKEND_URL + SIGNUP_PATH;
-        axios.post(url, {
-            username: username,
-            password: password
-        })
+        const request_data = {
+          username: username,
+          password: password
+        }
+        axios.post(url, request_data)
           .then(function (response) {
             console.log(backendParser(response));
-            handlePossibleException(response)
-            navigation.navigate('Login',{userCreationSuccessful: "User Created Successfully"})
+            if (response.data.hasOwnProperty('Exception')){
+              handleExceptions(response)
+            }
+            else {
+              navigation.navigate('Login', {userCreationSuccessful: "User Created Successfully"})
+            }  
           })
           .catch(function (error) {
             console.log(error);
             setErrorMessage("Service error. Please try again later")
           });
-
       }
 
-      function handlePossibleException(response){
-        if (response.data.hasOwnProperty('Exception')){
-        const exceptionName = response.data.hasOwnProperty('Exception')
-              if (exceptionName == DUPLICATE_USERNAME){
+      function handleExceptions(response){
+              const exceptionName = response.data.hasOwnProperty('Exception')
+              if (exceptionName == DUPLICATE_USERNAME) {
                 console.log("username exists")
                 setErrorMessage("Username already exists")
-              }
-              else{
+              } else {
                 throw 'Service Error from Backend'
-              }
-      }
+              }  
     }
       
       return (

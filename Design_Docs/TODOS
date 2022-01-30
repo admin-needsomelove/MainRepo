@@ -1,9 +1,7 @@
 P0:
 Navigator logic for frontend using redux
-Ddb access patterns
-Sam deploy lambda locally
-Refactor and refactor . Clean it up
-Add decent logging to backend and frontend
+frontend refactor
+Add decent logging to frontend
 Get stream.io add
 
 

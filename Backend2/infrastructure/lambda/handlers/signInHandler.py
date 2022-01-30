@@ -1,16 +1,8 @@
 import logging
-import boto3
 from utilities import auth , http, ddb , exceptions
 from constants import *
 
 logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
-dynamodb = boto3.resource('dynamodb')
-
-FAILURE_RESPONSE = {
-        'authentication_success': False
-}
 
 @exceptions.exception_handler
 def signInHandler(body: dict):
@@ -19,21 +11,30 @@ def signInHandler(body: dict):
         raise Exception(INVALID_REQUEST_PARAMS)
 
     input_password = body['password']
-    result = ddb.get_item({'username': body['username']})
-    logger.info("result from db is " + str(result))
+    input_username = body['username']
+    
+    result = ddb.get_item({'username': input_username})
+    
+    logger.info("DynamoDb returned " + str(result) + "for username " + input_username)
     
     if not result or 'Item' not in result:
-        return http.returnHttpResponse(FAILURE_RESPONSE)
+        raise Exception(INCORRECT_USERNAME_PASSWORD)
+
+    if 'password' not in result['Item'] or 'username' not in result['Item']:
+        logger.info("DynamoDB entry is invalid. Username or password missing in the table")
+        raise Exception(CORRUPTED_DB)
     
     actual_password = result['Item']['password']
-    if input_password!=actual_password:
-        return http.returnHttpResponse(FAILURE_RESPONSE)
+    actual_username = result['Item']['username']
     
-    username = result['Item']['username']
-    token = auth.generate_token(username,input_password)
+    if input_password!=actual_password:
+        logger.info("Passwords do not match")
+        raise Exception(INCORRECT_USERNAME_PASSWORD)
+    
+    token = auth.generate_token(actual_username,actual_password)
+    logger.info("Generated token : " + token)
     
     result = {
-        'authentication_success': True,
         'token': token
     }
 

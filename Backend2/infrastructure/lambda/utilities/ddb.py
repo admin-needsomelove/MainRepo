@@ -1,5 +1,7 @@
 import boto3
 import os
+import botocore.exceptions
+from constants import *
 
 # get item, scan itmes, update items, put items, put items do not overwrite
 
@@ -15,25 +17,29 @@ def get_item(key):
     
     return result
 
-def put_item_do_not_overwrite(key, unique_attribute):
-    result = table.put_item(
-       Item=key,
-       ConditionExpression='attribute_not_exists('+unique_attribute+')'
+def put_username_password(key, unique_attribute):
+    
+    try:
+        table.put_item(
+        Item=key,
+        ConditionExpression='attribute_not_exists('+unique_attribute+')'
     )
-
-    return True
+    except botocore.exceptions.ClientError as e:
+        if e.response['Error']['Code'] == 'ConditionalCheckFailedException':
+            raise Exception(DUPLICATE_USERNAME_EXCEPTION)
 
 def put_item(key):
-    result = table.put_item(
+    table.put_item(
        Item=key
     )
 
-    return True
+def scan_table():
+    response = table.scan()
+    result = response['Items']
 
-def update_item(key, updatedAttributes):
-    result = table.update_item(
-        Key=key,
-        AttributeUpdates=updatedAttributes
-    )
+    while 'LastEvaluatedKey' in response:
+        response = table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
+        result.extend(response['Items'])
 
-    return True
+    return result
+    

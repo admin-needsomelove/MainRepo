@@ -4,12 +4,12 @@ import { View } from 'react-native';
 import { styles } from '../../styles/common';
 import axios from 'axios';
 import { BACKEND_URL, SIGNIN_PATH } from '../../constants/URL';
+import { INCORRECT_USERNAME_PASSWORD } from '../../constants/Exceptions';
 
 export default function Login ({ route , navigation } ) {
 
       const [username, setUsername] = React.useState("");
       const [password, setPassword] = React.useState("");
-      console.log(JSON.stringify(route))
       const userCreationMessage = 'params' in route ? route.params.userCreationSuccessful : {};
       const [errorMessage, setErrorMessage] = React.useState(userCreationMessage)
 
@@ -17,28 +17,39 @@ export default function Login ({ route , navigation } ) {
         console.log('Login Pressed')
 
         const url = BACKEND_URL + SIGNIN_PATH;
-        axios.post(url, {
+        const request_data = {
             username: username,
             password: password
-        })
+        }
+        axios.post(url, request_data)
           .then(function (response) {
             console.log(response)
-            let authentication_success = response.data.authentication_success
-            if (authentication_success){
-                global.token = response.data.token
-                navigation.navigate('AskingCustomerType')
+            if (response.data.hasOwnProperty('Exception')){
+                handleExceptions(response)
             }
             else {
-                setErrorMessage("Incorrect Password dummy");
+                if (response.data.hasOwnProperty('token')){
+                    global.token = response.data.token
+                    navigation.navigate('AskingCustomerType')
+                }
             }
           })
           .catch(function (error) {
             console.log(error)
             setErrorMessage("Service error. Please try again later");
-
           });
-
       }
+
+      function handleExceptions(response){
+            const exceptionName = response.data['Exception']
+            if (exceptionName==INCORRECT_USERNAME_PASSWORD){
+                setErrorMessage("Username or password incorrect");
+            }
+            else {
+                throw exceptionName
+            }
+        }
+      
       
       return (
             <View style={styles.container}>

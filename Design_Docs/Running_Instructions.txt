@@ -4,4 +4,4 @@ npm start with w
 
 SAM locally running instructions:
 share directory with docker
-sam local invoke mainLambdaFunction --event api-event.json -t ./cdk.out/RootStack.template.json
+sam local invoke mainLambdaFunction --event sam-events/api-event.json -t ./cdk.out/RootStack.template.json
