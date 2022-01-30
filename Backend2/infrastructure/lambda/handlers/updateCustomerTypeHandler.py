@@ -1,9 +1,10 @@
 import logging
-from utilities import auth, http , ddb
+from utilities import auth, http , ddb, exceptions
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+@exceptions.exception_handler
 def updateCustomerTypeHandler(body: dict):
 
     if 'token' not in body or 'account_type' not in body:

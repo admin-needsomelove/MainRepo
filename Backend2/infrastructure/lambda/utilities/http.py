@@ -10,3 +10,9 @@ def returnHttpResponse(body):
         },
         'body': json.dumps(body)
     }
+
+def returnHttpException(exceptionName):
+    return returnHttpResponse({'Exception': exceptionName})
+
+def returnHttpSuccess():
+    return returnHttpResponse({'Operation':'Success'})

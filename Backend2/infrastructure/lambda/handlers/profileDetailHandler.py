@@ -1,17 +1,13 @@
 import boto3
-import os
-import json
 import logging
-
-from utilities import http , ddb
-#dynamodb = boto3.resource('dynamodb')
+from utilities import http , ddb, exceptions
+from constants import *
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+@exceptions.exception_handler
 def profileDetailHandler(body: dict):
-
-    #table = dynamodb.Table(os.environ['DYNAMODB'])
 
     """ result = table.get_item(
         Key={
@@ -19,7 +15,7 @@ def profileDetailHandler(body: dict):
         }
     ) """
     if 'username' not in body:
-        return http.returnHttpResponse({})
+        raise Exception(INVALID_REQUEST_PARAMS)
 
     result = ddb.get_item({'username': body['username']})
 

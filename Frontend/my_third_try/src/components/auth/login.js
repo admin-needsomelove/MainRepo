@@ -4,13 +4,14 @@ import { View } from 'react-native';
 import { styles } from '../../styles/common';
 import axios from 'axios';
 import { BACKEND_URL, SIGNIN_PATH } from '../../constants/URL';
-import { backendParser } from '../../services/parser';
 
 export default function Login ({ route , navigation } ) {
 
       const [username, setUsername] = React.useState("");
       const [password, setPassword] = React.useState("");
-      const [errorMessage, setErrorMessage] = React.useState("")
+      console.log(JSON.stringify(route))
+      const userCreationMessage = 'params' in route ? route.params.userCreationSuccessful : {};
+      const [errorMessage, setErrorMessage] = React.useState(userCreationMessage)
 
       function onLoginPress() {
         console.log('Login Pressed')

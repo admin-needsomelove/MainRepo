@@ -10,6 +10,7 @@ from handlers.signUpHandler import signUpHandler
 from handlers.signInHandler import signInHandler
 from handlers.updateCustomerTypeHandler import updateCustomerTypeHandler
 from constants import *
+from utilities import exceptions
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -33,7 +34,6 @@ def lambda_handler(event, context):
 
     #because profileList has no body
     PATHS_WITH_NO_EXPECTED_BODY = set([PROFILE_LIST_PATH])
-    logger.info("The path is " + path)
     if path not in PATHS_WITH_NO_EXPECTED_BODY:
         body = jsonpickle.decode(event['body'])
     else:

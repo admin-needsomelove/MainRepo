@@ -1,9 +1,7 @@
 import logging
 import boto3
-import os
-import json
-import jwt
-from utilities import auth , http, ddb
+from utilities import auth , http, ddb , exceptions
+from constants import *
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -14,16 +12,17 @@ FAILURE_RESPONSE = {
         'authentication_success': False
 }
 
+@exceptions.exception_handler
 def signInHandler(body: dict):
 
     if 'password' not in body or 'username' not in body:
-        return http.returnHttpResponse({})
+        raise Exception(INVALID_REQUEST_PARAMS)
 
     input_password = body['password']
     result = ddb.get_item({'username': body['username']})
     logger.info("result from db is " + str(result))
     
-    if 'Item' not in result:
+    if not result or 'Item' not in result:
         return http.returnHttpResponse(FAILURE_RESPONSE)
     
     actual_password = result['Item']['password']

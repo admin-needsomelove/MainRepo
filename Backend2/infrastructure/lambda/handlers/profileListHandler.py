@@ -2,11 +2,14 @@ import boto3
 import os
 import json
 import logging
+from utilities import exceptions
+
 dynamodb = boto3.resource('dynamodb')
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+@exceptions.exception_handler
 def profileListHandler(body: dict):
 
     table = dynamodb.Table(os.environ['DYNAMODB'])

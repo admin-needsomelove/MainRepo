@@ -5,6 +5,7 @@ import { styles } from '../../styles/common';
 import axios from 'axios';
 import { BACKEND_URL, SIGNUP_PATH } from '../../constants/URL';
 import { backendParser } from '../../services/parser';
+import { DUPLICATE_USERNAME } from '../../constants/Exceptions';
 
 export default function Signup ({ route , navigation } ) {
 
@@ -14,7 +15,6 @@ export default function Signup ({ route , navigation } ) {
 
       function onCreateAccount() {
         console.log('Create Account Pressed')
-
         const url = BACKEND_URL + SIGNUP_PATH;
         axios.post(url, {
             username: username,
@@ -22,13 +22,8 @@ export default function Signup ({ route , navigation } ) {
         })
           .then(function (response) {
             console.log(backendParser(response));
-            if (response.data['Error']){
-              console.log("username exists")
-              setErrorMessage("Username already exists")
-            }
-            else {
-              navigation.navigate('Login')
-            }
+            handlePossibleException(response)
+            navigation.navigate('Login',{userCreationSuccessful: "User Created Successfully"})
           })
           .catch(function (error) {
             console.log(error);
@@ -36,6 +31,19 @@ export default function Signup ({ route , navigation } ) {
           });
 
       }
+
+      function handlePossibleException(response){
+        if (response.data.hasOwnProperty('Exception')){
+        const exceptionName = response.data.hasOwnProperty('Exception')
+              if (exceptionName == DUPLICATE_USERNAME){
+                console.log("username exists")
+                setErrorMessage("Username already exists")
+              }
+              else{
+                throw 'Service Error from Backend'
+              }
+      }
+    }
       
       return (
         <View style={styles.container}>
@@ -47,7 +55,7 @@ export default function Signup ({ route , navigation } ) {
                 </Button>
                 <Text>
                     <Text>Already have an account? </Text>
-                    <Text onPress={(e) => navigation.navigate('Login')} style={styles.green}>{'Login'}</Text>
+                    <Text onPress={(e) => navigation.navigate('Login',{})} style={styles.green}>{'Login'}</Text>
                 </Text>
                 
         </View>
