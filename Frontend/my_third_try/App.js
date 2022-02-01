@@ -9,6 +9,11 @@ import SignUp from './src/components/auth/signUp'
 import Login from './src/components/auth/login';
 import AskingCustomerType from './src/components/AskingCustomerType';
 import Chat from './src/components/chat/Chat';
+import FileSelector from './src/components/UploadImages';
+
+import store from './src/services/reduxStore'
+import { Provider } from 'react-redux'
+
 
 function HomeScreen({ navigation }) {
   return (
@@ -24,17 +29,20 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Chat">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="AskingCustomerType" component={AskingCustomerType} />
-        <Stack.Screen name="Welcome" component={Welcome} />
-        <Stack.Screen name="Results" component={Results} />
-        <Stack.Screen name="Chat" component={Chat} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="SignUp">
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="AskingCustomerType" component={AskingCustomerType} />
+          <Stack.Screen name="Welcome" component={Welcome} />
+          <Stack.Screen name="Results" component={Results} />
+          <Stack.Screen name="Chat" component={Chat} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+    
   );
 }
 

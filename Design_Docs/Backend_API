@@ -25,3 +25,14 @@ chat API's
 signUp(username,password)
 signin(username,password)
 
+
+#chat service
+sendMessage(token, message)
+
+we would need to use web socket api gateway nd ddb and lambda architecture 
+ddb inserts of new messages will release a stream wihich will be sent to connected clients
+https://www.freecodecamp.org/news/real-time-applications-using-websockets-with-aws-api-gateway-and-lambda-a5bb493e9452/
+https://medium.com/@budilov/build-a-react-native-chat-app-on-aws-part-2-dynamodb-5ea1b965bb05
+
+ddb schema
+userId , connectionId

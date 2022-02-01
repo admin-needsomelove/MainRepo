@@ -1,7 +1,20 @@
-P0:
-Navigator logic for frontend using redux
-Get stream.io add
+Clarify idea:
+Refigure out the economics and the use cases. Video, meetup, tokens think about all that . is it a better/less scammier seeking ?
 
+P0:
+expo application services must be able to build and sign the app
+
+Navigator logic for frontend using redux
+global redux state for app to show screen based on user_type, etc..
+maintain state of user_type , profile complete, etc.. 
+https://redux.js.org/tutorials/essentials/part-1-overview-concepts
+
+Photo and video upload to s3 using expo-file-system and aws-sdk directly from frontend
+Maybe all-in-one this will take care of it https://react-dropzone-uploader.js.org/docs/quick-start
+https://medium.com/@aurelie.lebec/uploading-pictures-and-videos-from-your-phone-in-your-app-with-react-native-expo-cloudinary-and-d3ad4358e81a
+https://scottbolinger.com/react-native-video-app/
+https://docs.expo.dev/versions/latest/sdk/imagepicker/
+https://docs.expo.dev/versions/latest/sdk/filesystem/
 
 LONG TERM:
 signup credential requirements
